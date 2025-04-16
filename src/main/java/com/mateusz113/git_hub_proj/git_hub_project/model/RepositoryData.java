@@ -1,12 +1,18 @@
 package com.mateusz113.git_hub_proj.git_hub_project.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.time.OffsetDateTime;
 
 public record RepositoryData(
-        String name,
+        @JsonProperty("full_name")
+        String fullName,
         String description,
-        String clone_url,
-        Long stargazers_count,
-        OffsetDateTime created_at
+        @JsonProperty("clone_url")
+        String cloneUrl,
+        @JsonProperty("stargazers_count")
+        Long stars,
+        @JsonProperty("created_at")
+        OffsetDateTime createdAt
 ) {
 }
