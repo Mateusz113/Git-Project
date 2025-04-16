@@ -28,10 +28,8 @@ public class RepositoryService {
 
     public RepositoryDto getLocalRepositoryData(String owner, String repoName) {
         String fullName = getRepositoryFullName(owner, repoName);
-        Repository repository = repositoryRepository.findByFullName(fullName);
-        if (repository == null) {
-            throw new RepositoryNotFoundException("Repository with given data was not found.", OffsetDateTime.now(clock));
-        }
+        Repository repository = repositoryRepository.findByFullName(fullName)
+                .orElseThrow(() -> new RepositoryNotFoundException("Repository with given data was not found.", OffsetDateTime.now(clock)));
         return repositoryMapper.toDto(repository);
     }
 
